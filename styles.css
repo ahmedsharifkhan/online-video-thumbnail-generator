@@ -1,35 +1,23 @@
 body {
-    font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    color: #333;
 }
 
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+.card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 #video {
-    max-width: 100%;
-    height: auto;
+    max-height: 300px;
 }
 
-canvas {
-    display: none;
-}
-
-.thumbnail-img {
+#thumbnails img {
     margin: 10px;
-    max-width: 200px;
+    border: 1px solid #ccc;
     cursor: pointer;
-}
-
-.thumbnail-img img {
-    width: 100%;
+    width: 100px;
     height: auto;
 }
 
-.thumbnail-options {
-    text-align: left;
+#thumbnail-canvas {
+    display: none;
 }

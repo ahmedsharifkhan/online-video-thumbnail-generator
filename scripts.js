@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileRadio = document.getElementById('file-radio');
     const snapPhotoButton = document.getElementById('snap-photo');
     const autoSnapButton = document.getElementById('auto-snap');
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    const imageWidthInput = document.getElementById('image-width');
     const snapIntervalSelect = document.getElementById('snap-interval');
     const thumbnailsContainer = document.getElementById('thumbnails');
+    const canvas = document.getElementById('thumbnail-canvas');
+    const context = canvas.getContext('2d');
+    const imageWidthInput = document.getElementById('image-width');
 
     urlRadio.addEventListener('change', function () {
         videoFileInput.disabled = true;
@@ -40,8 +40,19 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     autoSnapButton.addEventListener('click', function () {
-        const interval = snapIntervalSelect.value;
+        const interval = parseInt(snapIntervalSelect.value, 10);
         autoSnapThumbnails(interval);
+    });
+
+    thumbnailsContainer.addEventListener('click', function (e) {
+        if (e.target.tagName === 'IMG') {
+            const img = e.target;
+            const dataURL = img.src;
+            const link = document.createElement('a');
+            link.href = dataURL;
+            link.download = 'thumbnail.png';
+            link.click();
+        }
     });
 
     function captureThumbnail() {
@@ -50,12 +61,20 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.width = width;
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
-        displayThumbnail(canvas.toDataURL());
+        const dataURL = canvas.toDataURL('image/png');
+        const img = document.createElement('img');
+        img.src = dataURL;
+        thumbnailsContainer.appendChild(img);
     }
 
     function autoSnapThumbnails(interval) {
         const duration = video.duration;
-        let snapCount;
-        let timeInterval;
-        
-        if (interval.includes('sec
+        const snapCount = Math.floor(duration / interval);
+        for (let i = 0; i <= snapCount; i++) {
+            setTimeout(function () {
+                video.currentTime = i * interval;
+                captureThumbnail();
+            }, i * 1000); // Adjust this value if needed
+        }
+    }
+});

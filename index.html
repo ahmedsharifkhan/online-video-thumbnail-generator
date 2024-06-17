@@ -8,49 +8,47 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-4 text-center">Online Video Thumbnail Generator</h1>
-        <div class="card p-4">
-            <div class="upload-section form-group">
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="url-radio" name="video-source" value="url" class="custom-control-input">
-                    <label class="custom-control-label" for="url-radio">Video from URL</label>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Online Video Thumbnail Generator</h1>
+        <div class="card">
+            <div class="card-body">
+                <div class="upload-section mb-4">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="video-source" value="url" id="url-radio">
+                        <label class="form-check-label" for="url-radio">Video from URL</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="video-source" value="file" id="file-radio" checked>
+                        <label class="form-check-label" for="file-radio">Video from file</label>
+                    </div>
+                    <input type="text" id="video-url" class="form-control mt-2" placeholder="Enter video URL" disabled>
+                    <input type="file" id="video-file" class="form-control mt-2">
                 </div>
-                <div class="custom-control custom-radio custom-control-inline">
-                    <input type="radio" id="file-radio" name="video-source" value="file" class="custom-control-input" checked>
-                    <label class="custom-control-label" for="file-radio">Video from file</label>
+                <div class="video-preview mb-4">
+                    <video id="video" controls class="w-100"></video>
                 </div>
-                <input type="text" id="video-url" class="form-control my-2" placeholder="Enter video URL" disabled>
-                <input type="file" id="video-file" class="form-control-file">
-            </div>
-            <div class="video-preview my-4 text-center">
-                <video id="video" controls class="img-fluid"></video>
-            </div>
-            <div class="thumbnail-options form-group">
-                <label for="image-width">Image width:</label>
-                <input type="number" id="image-width" class="form-control" value="640">
-                <label for="snap-interval" class="mt-2">Auto Snap Interval:</label>
-                <select id="snap-interval" class="form-control">
-                    <option value="2">2%</option>
-                    <option value="5">5%</option>
-                    <option value="10">10%</option>
-                    <option value="1">1 sec</option>
-                    <option value="2sec">2 sec</option>
-                    <option value="3sec">3 sec</option>
-                    <option value="5sec">5 sec</option>
-                    <option value="10sec">10 sec</option>
-                </select>
-                <div class="mt-3">
+                <div class="thumbnail-options mb-4">
+                    <div class="form-group">
+                        <label for="image-width">Image width:</label>
+                        <input type="number" id="image-width" class="form-control" value="1080">
+                    </div>
                     <button id="snap-photo" class="btn btn-primary">Snap Photo</button>
-                    <button id="auto-snap" class="btn btn-secondary">Auto Snap</button>
+                    <button id="auto-snap" class="btn btn-secondary">Auto Snap Each</button>
+                    <select id="snap-interval" class="form-control d-inline-block w-auto ml-2">
+                        <option value="1">1 sec</option>
+                        <option value="2">2 sec</option>
+                        <option value="3">3 sec</option>
+                        <option value="5">5 sec</option>
+                        <option value="10">10 sec</option>
+                        <option value="30">30 sec</option>
+                        <option value="60">1 min</option>
+                    </select>
                 </div>
+                <div id="thumbnails" class="d-flex flex-wrap"></div>
+                <canvas id="thumbnail-canvas"></canvas>
             </div>
         </div>
-        <div class="thumbnails mt-4 text-center" id="thumbnails"></div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
