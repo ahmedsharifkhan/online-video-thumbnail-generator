@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Video Thumbnail Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Online Video Thumbnail Generator</h1>
+        <div class="upload-section">
+            <label>
+                <input type="radio" name="video-source" value="url" id="url-radio"> Video from URL
+            </label>
+            <label>
+                <input type="radio" name="video-source" value="file" id="file-radio" checked> Video from file
+            </label>
+            <input type="text" id="video-url" placeholder="Enter video URL" disabled>
+            <input type="file" id="video-file">
+        </div>
+        <div class="video-preview">
+            <video id="video" controls></video>
+        </div>
+        <div class="thumbnail-options">
+            <label for="image-width">Image width:</label>
+            <input type="number" id="image-width" value="640">
+            <button id="snap-photo">Snap Photo</button>
+            <button id="auto-snap">Auto Snap Each</button>
+            <select id="snap-interval">
+                <option value="2">2%</option>
+                <option value="5">5%</option>
+                <option value="10">10%</option>
+            </select>
+            <button id="save-image">Save Image</button>
+        </div>
+        <canvas id="thumbnail-canvas"></canvas>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
