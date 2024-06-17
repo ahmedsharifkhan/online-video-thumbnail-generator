@@ -2,7 +2,6 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
     color: #333;
-    text-align: center;
 }
 
 .container {
@@ -11,20 +10,26 @@ body {
     padding: 20px;
 }
 
-.upload-section {
-    margin: 20px 0;
-}
-
 #video {
     max-width: 100%;
     height: auto;
-    margin: 20px 0;
-}
-
-.thumbnail-options {
-    margin: 20px 0;
 }
 
 canvas {
     display: none;
+}
+
+.thumbnail-img {
+    margin: 10px;
+    max-width: 200px;
+    cursor: pointer;
+}
+
+.thumbnail-img img {
+    width: 100%;
+    height: auto;
+}
+
+.thumbnail-options {
+    text-align: left;
 }

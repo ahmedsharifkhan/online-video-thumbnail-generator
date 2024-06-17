@@ -4,38 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Video Thumbnail Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <h1>Online Video Thumbnail Generator</h1>
-        <div class="upload-section">
-            <label>
-                <input type="radio" name="video-source" value="url" id="url-radio"> Video from URL
-            </label>
-            <label>
-                <input type="radio" name="video-source" value="file" id="file-radio" checked> Video from file
-            </label>
-            <input type="text" id="video-url" placeholder="Enter video URL" disabled>
-            <input type="file" id="video-file">
+        <h1 class="my-4 text-center">Online Video Thumbnail Generator</h1>
+        <div class="card p-4">
+            <div class="upload-section form-group">
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="url-radio" name="video-source" value="url" class="custom-control-input">
+                    <label class="custom-control-label" for="url-radio">Video from URL</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                    <input type="radio" id="file-radio" name="video-source" value="file" class="custom-control-input" checked>
+                    <label class="custom-control-label" for="file-radio">Video from file</label>
+                </div>
+                <input type="text" id="video-url" class="form-control my-2" placeholder="Enter video URL" disabled>
+                <input type="file" id="video-file" class="form-control-file">
+            </div>
+            <div class="video-preview my-4 text-center">
+                <video id="video" controls class="img-fluid"></video>
+            </div>
+            <div class="thumbnail-options form-group">
+                <label for="image-width">Image width:</label>
+                <input type="number" id="image-width" class="form-control" value="640">
+                <label for="snap-interval" class="mt-2">Auto Snap Interval:</label>
+                <select id="snap-interval" class="form-control">
+                    <option value="2">2%</option>
+                    <option value="5">5%</option>
+                    <option value="10">10%</option>
+                    <option value="1">1 sec</option>
+                    <option value="2sec">2 sec</option>
+                    <option value="3sec">3 sec</option>
+                    <option value="5sec">5 sec</option>
+                    <option value="10sec">10 sec</option>
+                </select>
+                <div class="mt-3">
+                    <button id="snap-photo" class="btn btn-primary">Snap Photo</button>
+                    <button id="auto-snap" class="btn btn-secondary">Auto Snap</button>
+                </div>
+            </div>
         </div>
-        <div class="video-preview">
-            <video id="video" controls></video>
-        </div>
-        <div class="thumbnail-options">
-            <label for="image-width">Image width:</label>
-            <input type="number" id="image-width" value="640">
-            <button id="snap-photo">Snap Photo</button>
-            <button id="auto-snap">Auto Snap Each</button>
-            <select id="snap-interval">
-                <option value="2">2%</option>
-                <option value="5">5%</option>
-                <option value="10">10%</option>
-            </select>
-            <button id="save-image">Save Image</button>
-        </div>
-        <canvas id="thumbnail-canvas"></canvas>
+        <div class="thumbnails mt-4 text-center" id="thumbnails"></div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>

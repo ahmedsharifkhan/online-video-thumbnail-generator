@@ -6,11 +6,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const fileRadio = document.getElementById('file-radio');
     const snapPhotoButton = document.getElementById('snap-photo');
     const autoSnapButton = document.getElementById('auto-snap');
-    const saveImageButton = document.getElementById('save-image');
-    const canvas = document.getElementById('thumbnail-canvas');
+    const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
     const imageWidthInput = document.getElementById('image-width');
     const snapIntervalSelect = document.getElementById('snap-interval');
+    const thumbnailsContainer = document.getElementById('thumbnails');
 
     urlRadio.addEventListener('change', function () {
         videoFileInput.disabled = true;
@@ -40,16 +40,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     autoSnapButton.addEventListener('click', function () {
-        const interval = parseInt(snapIntervalSelect.value, 10);
+        const interval = snapIntervalSelect.value;
         autoSnapThumbnails(interval);
-    });
-
-    saveImageButton.addEventListener('click', function () {
-        const dataURL = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = dataURL;
-        link.download = 'thumbnail.png';
-        link.click();
     });
 
     function captureThumbnail() {
@@ -58,16 +50,12 @@ document.addEventListener('DOMContentLoaded', function () {
         canvas.width = width;
         canvas.height = height;
         context.drawImage(video, 0, 0, width, height);
+        displayThumbnail(canvas.toDataURL());
     }
 
     function autoSnapThumbnails(interval) {
         const duration = video.duration;
-        const snapCount = Math.floor(100 / interval);
-        for (let i = 0; i <= snapCount; i++) {
-            setTimeout(function () {
-                video.currentTime = (duration * i * interval) / 100;
-                captureThumbnail();
-            }, i * 1000); // Adjust this value if needed
-        }
-    }
-});
+        let snapCount;
+        let timeInterval;
+        
+        if (interval.includes('sec
